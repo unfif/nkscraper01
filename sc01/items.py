@@ -9,6 +9,8 @@ import scrapy
 
 class Sc01Item(scrapy.Item):
     raceid = scrapy.Field()
+    raceplace = scrapy.Field()
+    racenum = scrapy.Field()
     racetitle = scrapy.Field()
 
     place = scrapy.Field()

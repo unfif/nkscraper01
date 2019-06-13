@@ -12,8 +12,8 @@ class NkdailySpider(CrawlSpider):
 
     rules = (
         Rule(LinkExtractor(
-            allow = 'db.netkeiba.com/race/',
-            deny = 'db.netkeiba.com/race/movie',
+            allow = ['db.netkeiba.com/race/'],
+            deny = ['db.netkeiba.com/race/movie'],
             restrict_css = '.race_kaisai_info'
         ),
             callback = 'parse_races', follow = False
@@ -21,16 +21,17 @@ class NkdailySpider(CrawlSpider):
     )
 
     def parse_races(self, response):
-        # print(response)
         item = Sc01Item()
-        # raceinfo = response.css('.race_head_inner')
-        # racenums = raceinfo.css('.race_num')
-        # item['raceid'] = racenums.css('li')[10].css('a::attr(href)').get().split('/')[2]
-        # mainrace_data = raceinfo.css('.mainrace_data')
-        # item['racetitle'] = mainrace_data.css('h1::text').get()
-        # item['tmp01'] = response.css('::text').getall()
+        raceinfo = response.css('.race_head_inner')
+        raceplaceurl = raceinfo.css('ul.race_place a.active::attr(href)').get()
+        # raceplaceurl = response.request.url
+        item['raceid'] = raceplaceurl.split('/')[2]
+        item['raceplace'] = raceinfo.css('ul.race_place a.active::text').get()
+        item['racenum'] = raceinfo.css('div.race_num a.active::text').get().split('R')[0]
+        item['racetitle'] = raceinfo.css('dl.racedata h1::text').get().strip()
+        # datadetail = raceinfo.css('div.data_intro p.smalltxt')
+
         for tr in response.css('[summary="レース結果"] tr:not(tr:first-of-type)'):
-            item['place'] = tr.css('td')[0].css('::text').get()
             item['postnum'] = tr.css('td')[1].css('span::text').get()
             item['horsenum'] = tr.css('td')[2].css('::text').get()
             item['horsename'] = tr.css('td')[3].css('a::text').get()
@@ -51,5 +52,6 @@ class NkdailySpider(CrawlSpider):
             item['owner'] = tr.css('td')[19].css('a::text').get()
             addedmoney = tr.css('td')[20].css('::text').get()
             item['addedmoney'] = addedmoney if addedmoney is not None else '0'
+            # print(item)
 
             yield item
