@@ -8,12 +8,16 @@
 import scrapy
 
 class Sc01Item(scrapy.Item):
-    raceid = scrapy.Field()
-    raceplace = scrapy.Field()
-    racenum = scrapy.Field()
-    racetitle = scrapy.Field()
-
+    id = scrapy.Field()
     place = scrapy.Field()
+    racenum = scrapy.Field()
+    title = scrapy.Field()
+    date = scrapy.Field()
+    schedule = scrapy.Field()
+    classification = scrapy.Field()
+    category = scrapy.Field()
+
+    placenum = scrapy.Field()
     postnum = scrapy.Field()
     horsenum = scrapy.Field()
     horsename = scrapy.Field()

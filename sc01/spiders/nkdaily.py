@@ -25,13 +25,23 @@ class NkdailySpider(CrawlSpider):
         raceinfo = response.css('.race_head_inner')
         raceplaceurl = raceinfo.css('ul.race_place a.active::attr(href)').get()
         # raceplaceurl = response.request.url
-        item['raceid'] = raceplaceurl.split('/')[2]
-        item['raceplace'] = raceinfo.css('ul.race_place a.active::text').get()
+        item['id'] = raceplaceurl.split('/')[2]
+        item['place'] = raceinfo.css('ul.race_place a.active::text').get()
         item['racenum'] = raceinfo.css('div.race_num a.active::text').get().split('R')[0]
-        item['racetitle'] = raceinfo.css('dl.racedata h1::text').get().strip()
+        item['title'] = raceinfo.css('dl.racedata h1::text').get().strip()
         # datadetail = raceinfo.css('div.data_intro p.smalltxt')
+        racedetails = raceinfo.css('dl.racedata + p.smalltxt::text').get()
+        racedatejp = racedetails.split()[0]
+        raceyear = racedatejp.split('年')[0]
+        racemonth = racedatejp.split('年')[1].split('月')[0].zfill(2)
+        raceday = racedatejp.split('月')[1].split('日')[0].zfill(2)
+        item['date'] = raceyear + '-' + racemonth + '-' + raceday
+        item['schedule'] = racedetails.split()[1]
+        item['classification'] = racedetails.split()[2]
+        item['category'] = racedetails.split()[3]
 
         for tr in response.css('[summary="レース結果"] tr:not(tr:first-of-type)'):
+            item['placenum'] = tr.css('td')[0].css('::text').get()
             item['postnum'] = tr.css('td')[1].css('span::text').get()
             item['horsenum'] = tr.css('td')[2].css('::text').get()
             item['horsename'] = tr.css('td')[3].css('a::text').get()
