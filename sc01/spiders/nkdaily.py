@@ -4,7 +4,6 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from sc01.items import Sc01Item
 
-
 class NkdailySpider(CrawlSpider):
     name = 'nkdaily'
     allowed_domains = ['db.netkeiba.com']

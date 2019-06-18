@@ -70,9 +70,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'sc01.pipelines.Sc01Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'sc01.pipelines.Sc01Pipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -100,4 +100,4 @@ FEED_EXPORT_ENCODING='utf-8'
 
 # USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'
 
-uri = os.environ['URI']
+URI = os.environ['URI']
