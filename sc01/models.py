@@ -5,7 +5,7 @@ from sqlalchemy import Integer, String, Text, Date, DateTime, Float#, Boolean, L
 from scrapy.utils.project import get_project_settings
 # import settings
 
-DeclarativeBase = declarative_base()
+Base = declarative_base()
 
 def db_connect():
     """Performs database connection using database settings from settings.py.
@@ -13,35 +13,35 @@ def db_connect():
     return create_engine(get_project_settings().get('URI'))
 
 def create_table(engine):
-    DeclarativeBase.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
-class nkdb_races(DeclarativeBase):
+class nkdb_races(Base):
     __tablename__ = "nkdb_races"
 
-    id = Column('id', Text, primary_key=True)
-    place = Column('place', Text)
-    racenum = Column('racenum', Integer)
-    title = Column('title', Text)
-    date = Column('date', Date)
-    schedule = Column('schedule', Text)
-    classification = Column('classification', Text)
-    category = Column('category', Text)
-    placenum = Column('placenum', Integer, primary_key=True)
-    postnum = Column('postnum', Integer)
-    horsenum = Column('horsenum', Integer)
-    horsename = Column('horsename', Text)
-    sex = Column('sex', Text)
-    age = Column('age', Integer)
-    weight = Column('weight', Float)
-    jockey = Column('jockey', Text)
-    time = Column('time', Text)
-    margin = Column('margin', Text)
-    position = Column('position', Text)
-    last3f = Column('last3f', Float)
-    odds = Column('odds', Float)
-    fav = Column('fav', Integer)
-    horseweight = Column('horseweight', Integer)
-    horseweightdiff = Column('horseweightdiff', Integer)
-    trainer = Column('trainer', Text)
-    owner = Column('owner', Text)
-    addedmoney = Column('addedmoney', Integer)
+    id = Column(Text, primary_key=True)
+    place = Column(Text)
+    racenum = Column(Integer)
+    title = Column(Text)
+    date = Column(Date)
+    schedule = Column(Text)
+    classification = Column(Text)
+    category = Column(Text)
+    placenum = Column(Integer, primary_key=True)
+    postnum = Column(Integer)
+    horsenum = Column(Integer)
+    horsename = Column(Text)
+    sex = Column(Text)
+    age = Column(Integer)
+    weight = Column(Float)
+    jockey = Column(Text)
+    time = Column(Text)
+    margin = Column(Text)
+    position = Column(Text)
+    last3f = Column(Float)
+    odds = Column(Float)
+    fav = Column(Integer)
+    horseweight = Column(Integer)
+    horseweightdiff = Column(Integer)
+    trainer = Column(Text)
+    owner = Column(Text)
+    addedmoney = Column(Integer)

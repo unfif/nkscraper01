@@ -11,6 +11,7 @@ import pandas as pd
 # import psycopg2
 
 class Sc01Pipeline(object):
+    # engine = None
     def __init__(self):
         """Initializes database connection and sessionmaker.
         Creates deals table."""
@@ -34,20 +35,30 @@ class Sc01Pipeline(object):
         """Save deals in the database.
         This method is called for every item pipeline component."""
         session = self.Session()
-        nkdbraces = nkdb_races()
-        # print(pd.DataFrame([item]))
-        for key in item.keys:
-            nkdbraces[key] = item[key]
+        nkdbraces = nkdb_races(**item)
+        # print(nkdbraces)
+        # nkdict = {}
+        # print(item['weight'])
+        # print(item.id)
+        # for key in item:
+        #     # print(key)
+        #     # nkdict[key] = item[key]
+        #     nkdbraces[key] = item[key]
 
-        print(nkdbraces)
-        df = pd.DataFrame(nkdbraces)#[item])
-        df.to_sql('Date', engine)#, index=False)#, if_exists='append')
+        # print(nkdbraces.id)
+
+        # print(nkdbraces)
+        # print(nkdict)
+        # df = pd.DataFrame([nkdict])#[item])
+        # print(df.weight)
+        #df
+        # PD.DataFrame([{'id': '3', 'pla\cenum': 5}]).to_sql('nkdb_races', self.engine, index=False, if_exists='replace')
         # print(dict(item), type(dict(item)))
         # nkdbraces.quote = item["quote"]
         # nkdbraces.author = item["author"]
         #
         try:
-            # session.add(nkdbraces)
+            session.add(nkdbraces)
             session.commit()
         except:
             session.rollback()
