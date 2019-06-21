@@ -42,3 +42,8 @@ class nkdb_races(Base):
     trainer = Column(Text)
     owner = Column(Text)
     addedmoney = Column(Integer)
+    
+    #def __repr__(self):
+    #    return "<User(name='%s', fullname='%s', nickname='%s')>" % (
+    #        self.name, self.fullname, self.nickname
+    #    )
