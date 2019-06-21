@@ -24,7 +24,7 @@ class NkdailySpider(CrawlSpider):
         raceinfo = response.css('.race_head_inner')
         raceplaceurl = raceinfo.css('ul.race_place a.active::attr(href)').get()
         # raceplaceurl = response.request.url
-        item['id'] = raceplaceurl.split('/')[2]
+        item['raceid'] = raceplaceurl.split('/')[2]
         item['place'] = raceinfo.css('ul.race_place a.active::text').get()
         item['racenum'] = raceinfo.css('div.race_num a.active::text').get().split('R')[0]
         item['title'] = raceinfo.css('dl.racedata h1::text').get().strip()
