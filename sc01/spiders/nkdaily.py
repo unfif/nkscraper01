@@ -13,7 +13,7 @@ class NkdailySpider(CrawlSpider):
         Rule(LinkExtractor(
             allow = ['db.netkeiba.com/race/'],
             deny = ['db.netkeiba.com/race/movie'],
-            restrict_css = '.race_kaisai_info'
+            restrict_css = ['.race_kaisai_info']
         ),
             callback = 'parse_races', follow = False
         ),

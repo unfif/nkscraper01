@@ -42,8 +42,8 @@ class nkdb_races(Base):
     trainer = Column(Text)
     owner = Column(Text)
     addedmoney = Column(Integer)
-    
-    #def __repr__(self):
-    #    return "<User(name='%s', fullname='%s', nickname='%s')>" % (
+
+    # def __repr__(self):
+    #    return "f<User(name='{}', fullname='{}', nickname='{}')>".format(
     #        self.name, self.fullname, self.nickname
     #    )
